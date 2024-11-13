@@ -24,11 +24,28 @@ renderer.render(scene, camera);
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshStandardMaterial({
-  color: 0xfff467,
+  color: 0xff6347,
 });
 const torus = new THREE.Mesh(geometry, material);
 
+const hiddeTexture = new THREE.TextureLoader().load("img/bold.jpg");
+
+const hidde = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 3, 3),
+  new THREE.MeshBasicMaterial({ map: hiddeTexture })
+);
+
+const moonTexture = new THREE.TextureLoader().load("img/bold.jpg");
+
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(3, 32, 32),
+  new THREE.MeshStandardMaterial({ map: moonTexture })
+);
+moon.position.set(-20, 0, 0);
+
+scene.add(moon);
 scene.add(torus);
+scene.add(hidde);
 
 const pointLight = new THREE.PointLight(0xffffff, 200);
 pointLight.position.set(10, 5, 15);
