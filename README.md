@@ -20,10 +20,7 @@ Ik wil beginnen met een [tutorial](https://youtu.be/Q7AOvWpIVHU?si=e1vwXO631DTF9
 <details>
 <summary>Week 1</summary>
 
-
-
-
-Deze week staat in het teken van de eerste zetten met Three.js. Ik ging aan de slag met de tutorial om een beter idee te krijgen hoe three.js werkt en wat er allemaal mogelijk is met deze tool. De tutorial neemt je mee met het maken van een paar simpele vormen en legt een aantal basisdingen uit van Three.js. 
+Deze week staat in het teken van de eerste zetten met Three.js. Ik ging aan de slag met de tutorial om een beter idee te krijgen hoe three.js werkt en wat er allemaal mogelijk is met deze tool. De tutorial neemt je mee met het maken van een paar simpele vormen en legt een aantal basisdingen uit van Three.js.
 
 - Het aanmaken van je canvas
 - Scene, camera en renderengine instellen
@@ -185,8 +182,32 @@ function animate() {
 
 animate();
 ```
+
 </details>
 <details>
   <summary>Week 2</summary>
   Deze week wil ik gaan starten met het maken van mijn project. Ik ga eerst inspiratie opdoen voor een cool idee om te maken. Het moet natuurlijk ook haalbaar zijn voor mijn niveau en moet binnen de tijd dusdanig af zijn om beoordeeld te kunnen worden.
+
+Als eerst ben ik nog een beetje gaan experimenteren met de verschillende vormen en materialen die je kan gebruiken. Ik heb toen dit gemaakt:
+![1](vite-project/img/readme-img/4.png)
+Met deze code:
+
+```javascript
+const geometry = new THREE.TorusKnotGeometry(10, 5, 200, 100);
+const material = new THREE.MeshPhongMaterial({
+  color: "firebrick",
+  shininess: 1000,
+});
+const torus = new THREE.Mesh(geometry, material);
+
+scene.add(torus);
+
+const pointLight = new THREE.PointLight(0xffffff, 2000);
+pointLight.position.set(20, 0, 15);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+
+scene.add(pointLight, ambientLight);
+```
+
 </details>
