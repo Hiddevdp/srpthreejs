@@ -186,11 +186,10 @@ animate();
 </details>
 <details>
   <summary>Week 2</summary>
-  Deze week wil ik gaan starten met het maken van mijn project. Ik ga eerst inspiratie opdoen voor een cool idee om te maken. Het moet natuurlijk ook haalbaar zijn voor mijn niveau en moet binnen de tijd dusdanig af zijn om beoordeeld te kunnen worden.
-
-Als eerst ben ik nog een beetje gaan experimenteren met de verschillende vormen en materialen die je kan gebruiken. Ik heb toen dit gemaakt:
-![1](vite-project/img/readme-img/4.png)
-Met deze code:
+  Deze week wil ik gaan starten met het maken van mijn project. Ik ga eerst inspiratie opdoen voor een cool idee om te maken. Het moet natuurlijk ook haalbaar zijn voor mijn niveau en moet binnen de tijd dusdanig af zijn om beoordeeld te kunnen worden.Als eerst ben ik    nog een beetje gaan experimenteren met de verschillende vormen en materialen die je kan gebruiken. Ik heb toen dit gemaakt:
+  
+  ![3](vite-project/img/readme-img/4.png)
+  Met deze code:
 
 ```javascript
 const geometry = new THREE.TorusKnotGeometry(10, 5, 200, 100);
@@ -209,5 +208,6 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 
 scene.add(pointLight, ambientLight);
 ```
+Ook ben ik een idee tegen gekomen om aan te werken, ik wil namelijk een game gaan maken. Ik kwam op dat idee door deze [tutorial](https://www.youtube.com/watch?v=sPereCgQnWQ) die gaat over het maken van een simpel ontwijk spelletje in three.js. Ik wil uit deze tutorial leren hoe je een werkende game kan maken en daar mijn eigen draai aan geven.
 
 </details>
