@@ -14,44 +14,110 @@ const camera = new THREE.PerspectiveCamera(
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector("#bg"),
 });
-
+renderer.shadowMap.enabled = true;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
-camera.position.setX(-3);
+camera.position.setZ(2);
+camera.position.setX(3);
+camera.position.setY(1);
 
-const geometry = new THREE.TorusKnotGeometry(10, 5, 200, 100);
-const material = new THREE.MeshPhongMaterial({
-  color: "firebrick",
-  shininess: 1000,
+class Box extends THREE.Mesh {
+  constructor({
+    width,
+    height,
+    depth,
+    color = "#00ff00",
+    velocity = { x: 0, y: 0, z: 0 },
+    position = {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+  }) {
+    super(
+      new THREE.BoxGeometry(width, height, depth),
+      new THREE.MeshStandardMaterial({ color })
+    );
+
+    this.width = width;
+    this.height = height;
+    this.depth = depth;
+
+    this.position.set(position.x, position.y, position.z);
+
+    this.bottom = this.position.y - this.height / 2;
+    this.top = this.position.y + this.height / 2;
+
+    this.velocity = velocity;
+    this.gravity = -0.002;
+  }
+  update(ground) {
+    this.bottom = this.position.y - this.height / 2;
+    this.top = this.position.y + this.height / 2;
+
+    this.velocity.y += this.gravity;
+
+    if (this.bottom + this.velocity.y <= ground.top) {
+      this.velocity.y *= 0.8;
+      this.velocity.y = -this.velocity.y;
+    } else {
+      this.position.y += this.velocity.y;
+    }
+  }
+}
+
+const cube = new Box({
+  width: 1,
+  height: 1,
+  depth: 1,
+  color: 0xff0000,
+  velocity: {
+    x: 0,
+    y: -0.01,
+    z: 0,
+  },
+  position: {
+    x: 0,
+    y: 0,
+    z: 0,
+  },
 });
-const torus = new THREE.Mesh(geometry, material);
+cube.castShadow = true;
+scene.add(cube);
 
-scene.add(torus);
+const ground = new Box({
+  width: 5,
+  height: 0.5,
+  depth: 10,
+  color: "blue",
+  position: {
+    x: 0,
+    y: -2,
+    z: 0,
+  },
+});
 
-const pointLight = new THREE.PointLight(0xffffff, 2000);
-pointLight.position.set(20, 0, 15);
+ground.receiveShadow = true;
+scene.add(ground);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.y = 3;
+light.position.x = 2;
+light.position.z = 3;
+light.castShadow = true;
+scene.add(light);
 
-scene.add(pointLight, ambientLight);
-
-// Helpers
-const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper);
+console.log(cube.bottom);
+console.log(ground.top);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
   requestAnimationFrame(animate);
 
-  // torus.rotation.x += 0.01;
-  // torus.rotation.y += 0.005;
-  torus.rotation.z += 0.02;
+  cube.update(ground);
 
   controls.update();
-
   renderer.render(scene, camera);
 }
 
