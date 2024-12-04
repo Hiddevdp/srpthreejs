@@ -76,7 +76,7 @@ class Box extends THREE.Mesh {
 
   update(ground) {
     this.updateSides();
-    if ((this.zAcceleration = true)) {
+    if (this.zAcceleration) {
       this.velocity.z += 0.001;
     }
 
@@ -186,7 +186,17 @@ window.addEventListener("keydown", (event) => {
       keys.s.pressed = true;
       break;
     case "Space":
-      cube.velocity.y = 0.15;
+      if (canPressSpace) {
+        // Spacebar action
+        cube.velocity.y = 0.15;
+
+        // Set cooldown
+        canPressSpace = false;
+        setTimeout(() => {
+          canPressSpace = true;
+        }, 1000); // 2 seconds cooldown
+      }
+
       break;
   }
 });
@@ -209,20 +219,30 @@ window.addEventListener("keyup", (event) => {
 });
 
 const enemies = [];
-
+let canPressSpace = true;
 let frames = 0;
-let spawnRate = 200;
+let spawnRate = 0;
 function animate() {
   const animationId = requestAnimationFrame(animate);
   //movement code
 
   cube.velocity.x = 0;
   cube.velocity.z = 0;
-  if (keys.a.pressed) cube.velocity.x = -0.1;
-  else if (keys.d.pressed) cube.velocity.x = 0.1;
+  if (keys.a.pressed) {
+    cube.velocity.x = -0.05;
+    cube.rotation.z += 0.05;
+  } else if (keys.d.pressed) {
+    cube.velocity.x = 0.05;
+    cube.rotation.z -= 0.05;
+  }
 
-  if (keys.w.pressed) cube.velocity.z = -0.1;
-  else if (keys.s.pressed) cube.velocity.z = 0.1;
+  if (keys.w.pressed) {
+    cube.velocity.z = -0.05;
+    cube.rotation.x -= 0.05;
+  } else if (keys.s.pressed) {
+    cube.velocity.z = 0.05;
+    cube.rotation.x += 0.05;
+  }
 
   cube.update(ground);
   enemies.forEach((enemy) => {
@@ -263,7 +283,7 @@ function animate() {
     enemies.push(enemy);
     console.log(enemy.position.x);
   }
-
+  console.log(cube.velocity.z);
   frames++;
   controls.update();
   renderer.render(scene, camera);
