@@ -218,11 +218,11 @@ function animate() {
 
   cube.velocity.x = 0;
   cube.velocity.z = 0;
-  if (keys.a.pressed) cube.velocity.x = -0.05;
-  else if (keys.d.pressed) cube.velocity.x = 0.05;
+  if (keys.a.pressed) cube.velocity.x = -0.1;
+  else if (keys.d.pressed) cube.velocity.x = 0.1;
 
-  if (keys.w.pressed) cube.velocity.z = -0.05;
-  else if (keys.s.pressed) cube.velocity.z = 0.05;
+  if (keys.w.pressed) cube.velocity.z = -0.1;
+  else if (keys.s.pressed) cube.velocity.z = 0.1;
 
   cube.update(ground);
   enemies.forEach((enemy) => {
