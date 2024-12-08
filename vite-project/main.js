@@ -131,7 +131,7 @@ cube.castShadow = true;
 scene.add(cube);
 
 const ground = new Box({
-  width: 10,
+  width: 5,
   height: 0.5,
   depth: 50,
   color: "#0369a1",
@@ -237,32 +237,32 @@ function animate() {
     }
   });
 
-  if (frames % spawnRate === 0) {
-    if (spawnRate > 20) {
-      spawnRate -= 20;
-    }
-    const enemy = new Box({
-      width: 1,
-      height: 1,
-      depth: 1,
-      color: 0xff0000,
-      velocity: {
-        x: 0,
-        y: 0,
-        z: 0.01,
-      },
-      position: {
-        x: (Math.random() - 0.5) * 10,
-        y: 0,
-        z: -20,
-      },
-      zAcceleration: true,
-    });
-    enemy.castShadow = true;
-    scene.add(enemy);
-    enemies.push(enemy);
-    console.log(enemy.position.x);
-  }
+  // if (frames % spawnRate === 0) {
+  //   if (spawnRate > 20) {
+  //     spawnRate -= 20;
+  //   }
+  //   const enemy = new Box({
+  //     width: 1,
+  //     height: 1,
+  //     depth: 1,
+  //     color: 0xff0000,
+  //     velocity: {
+  //       x: 0,
+  //       y: 0,
+  //       z: 0.01,
+  //     },
+  //     position: {
+  //       x: 0,
+  //       y: 0,
+  //       z: -20,
+  //     },
+  //     zAcceleration: true,
+  //   });
+  //   enemy.castShadow = true;
+  //   scene.add(enemy);
+  //   enemies.push(enemy);
+  //   console.log(enemy.position.x);
+  // }
 
   frames++;
   controls.update();
