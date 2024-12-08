@@ -95,8 +95,8 @@ class Box extends THREE.Mesh {
         box2: ground,
       })
     ) {
-      this.velocity.y *= 0.5;
-      this.velocity.y = -this.velocity.y;
+      this.velocity.y = 0;
+      this.position.y = ground.top + this.height / 2;
     } else this.position.y += this.velocity.y;
   }
 }
@@ -131,7 +131,7 @@ cube.castShadow = true;
 scene.add(cube);
 
 const ground = new Box({
-  width: 5,
+  width: 10,
   height: 0.5,
   depth: 50,
   color: "#0369a1",
@@ -171,6 +171,8 @@ const keys = {
   },
 };
 
+let canPressSpace = true;
+
 window.addEventListener("keydown", (event) => {
   switch (event.code) {
     case "KeyA":
@@ -186,7 +188,16 @@ window.addEventListener("keydown", (event) => {
       keys.s.pressed = true;
       break;
     case "Space":
-      cube.velocity.y = 0.15;
+      if (canPressSpace && boxCollision({ box1: cube, box2: ground })) {
+        // Spacebar action
+        cube.velocity.y = 0.15;
+
+        // Set cooldown
+        canPressSpace = false;
+        setTimeout(() => {
+          canPressSpace = true;
+        }, 1000); // 1 second cooldown
+      }
       break;
   }
 });
@@ -237,32 +248,32 @@ function animate() {
     }
   });
 
-  // if (frames % spawnRate === 0) {
-  //   if (spawnRate > 20) {
-  //     spawnRate -= 20;
-  //   }
-  //   const enemy = new Box({
-  //     width: 1,
-  //     height: 1,
-  //     depth: 1,
-  //     color: 0xff0000,
-  //     velocity: {
-  //       x: 0,
-  //       y: 0,
-  //       z: 0.01,
-  //     },
-  //     position: {
-  //       x: 0,
-  //       y: 0,
-  //       z: -20,
-  //     },
-  //     zAcceleration: true,
-  //   });
-  //   enemy.castShadow = true;
-  //   scene.add(enemy);
-  //   enemies.push(enemy);
-  //   console.log(enemy.position.x);
-  // }
+  if (frames % spawnRate === 0) {
+    if (spawnRate > 20) {
+      spawnRate -= 20;
+    }
+    const enemy = new Box({
+      width: 1,
+      height: 1,
+      depth: 1,
+      color: 0xff0000,
+      velocity: {
+        x: 0,
+        y: 0,
+        z: 0.01,
+      },
+      position: {
+        x: (Math.random() - 0.5) * 10,
+        y: 0,
+        z: -20,
+      },
+      zAcceleration: true,
+    });
+    enemy.castShadow = true;
+    scene.add(enemy);
+    enemies.push(enemy);
+    console.log(enemy.position.x);
+  }
 
   frames++;
   controls.update();
