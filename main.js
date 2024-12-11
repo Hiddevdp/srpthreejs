@@ -191,7 +191,7 @@ scene.add(light);
 
 scene.add(new THREE.AmbientLight(0xffffff, 1));
 
-// const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 
 const scoreElement = document.getElementById("score");
 const highScoreElement = document.getElementById("highscore");
