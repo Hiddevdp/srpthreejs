@@ -291,7 +291,7 @@ function animate() {
   const animationId = requestAnimationFrame(animate);
   //movement code
 
-  enemies.forEach((enemy) => {
+  enemies.forEach((enemy, index) => {
     enemy.update(ground);
     if (
       boxCollision({
@@ -301,6 +301,10 @@ function animate() {
     ) {
       window.cancelAnimationFrame(animationId);
       alert(`Game Over! Your score was: ${score}`);
+    }
+    if (enemy.position.y < -10) {
+      scene.remove(enemy);
+      enemies.splice(index, 1);
     }
   });
 
