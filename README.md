@@ -540,6 +540,7 @@ Als laatste heb ik wat 3d objecten gedownload van Sketchfab.com om in te laden i
 Dit was nog een beetje lastig om werkend te krijgen met de code die ik al had maar uiteindelijk is het gelukt.
 
 ![9](img/readme-img/final.png)
+![10](img/readme-img/final2.png)
 
 Ik ben erg blij met het resultaat. Ik heb veel geleerd over threejs en de mogelijkheden. Ik ben van plan hier vaker mee te spelen en andere ideeen uit te werken. Ook heb ik meer geleerd te werken met javascript, daar ben ik ook blij om.
 
@@ -552,3 +553,4 @@ Als laatste zijn er nog wat dingen die ik zou willen aanvullen:
 - Mogelijkheid te bukken voor de vogels
 
 </details>
+```
