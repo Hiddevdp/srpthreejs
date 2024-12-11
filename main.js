@@ -30,7 +30,7 @@ const loader = new GLTFLoader();
 let trex;
 
 loader.load(
-  "meshes/trex/scene.gltf", // Replace with the path to your GLTF file
+  "./meshes/trex/scene.gltf", // Replace with the path to your GLTF file
   function (gltf) {
     trex = gltf.scene;
     trex.scale.set(0.05, 0.05, 0.05); // Adjust the scale if necessary
@@ -323,7 +323,7 @@ function animate() {
     //   spawnRate -= 20;
     // }
     loader.load(
-      "meshes/Cactus/cactus.glb", // Replace with the path to your GLTF file
+      "./meshes/Cactus/cactus.glb", // Replace with the path to your GLTF file
       function (gltf) {
         const cactus = gltf.scene;
         cactus.scale.set(0.03, 0.03, 0.03); // Adjust the scale if necessary
