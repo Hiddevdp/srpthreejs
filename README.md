@@ -552,4 +552,3 @@ Als laatste zijn er nog wat dingen die ik zou willen aanvullen:
 - Mogelijkheid te bukken voor de vogels
 
 </details>
-```
