@@ -493,6 +493,7 @@ animate();
 
 </details>
 Het uitendelijke gemaakte spel gaat dus om het ontwijken van de rode boxen. Je hebt controle over de groene. Ik heb nu geleerd hoe je allemaal elementen van een game zelf kan bouwen. Hier een lijstje van dingen die terugkomen in deze tutorial:
+
 - Gravity
 - Collision
 - Velocity
@@ -500,3 +501,7 @@ Het uitendelijke gemaakte spel gaat dus om het ontwijken van de rode boxen. Je h
 
 ![5](vite-project/img/readme-img/5.png)
 </details>
+<detials>
+  <summary>Week 3</summary>
+  <video src="img/readme-img/RollingBlock.mp4" width="320" height="240" controls></video>
+</detials>
