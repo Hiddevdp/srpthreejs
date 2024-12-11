@@ -257,23 +257,23 @@ function animate() {
       cube.position.y + 0.5,
       cube.position.z
     );
-    pivot.position.set(
-      pivot.position.x - 0.5,
-      pivot.position.y - 0.5,
-      pivot.position.z
+    cube.position.set(
+      cube.position.x - 0.5,
+      cube.position.y - 0.5,
+      cube.position.z
     );
     keys.a.targetPosition = cube.position.x - cube.width; // Set target position
-    keys.a.targetRotation = pivot.rotation.z + Math.PI / 2; // Set target rotation
+    keys.a.targetRotation = cube.rotation.z + Math.PI / 2; // Set target rotation
   }
   if (keys.a.rotate) {
     if (cube.position.x > keys.a.targetPosition) {
       cube.position.x -= 0.05;
-      pivot.rotation.z += (0.05 * (Math.PI / 2)) / cube.width; // Increment rotation
+      cube.rotation.z += (0.05 * (Math.PI / 2)) / cube.width; // Increment rotation
     } else {
       cube.position.x = keys.a.targetPosition;
-      pivot.rotation.z = keys.a.targetRotation;
+      cube.rotation.z = keys.a.targetRotation;
       keys.a.rotate = false;
-      pivot.rotation.set(0, 0, 0); // Reset orientation
+      cube.rotation.set(0, 0, 0); // Reset orientation
     }
   }
 
