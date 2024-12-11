@@ -501,7 +501,7 @@ Het uitendelijke gemaakte spel gaat dus om het ontwijken van de rode boxen. Je h
 
 ![5](vite-project/img/readme-img/5.png)
 </details>
-<detials>
+<details>
   <summary>Week 3</summary>
   <video src="img/readme-img/RollingBlock.mp4" width="320" height="240" controls></video>
-</detials>
+</details>
