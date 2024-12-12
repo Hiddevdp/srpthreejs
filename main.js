@@ -29,10 +29,8 @@ camera.position.setY(5);
 const loader = new GLTFLoader();
 let trex;
 
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-const targetUrl = "/meshes/trex/scene.gltf";
 loader.load(
-  proxyUrl + targetUrl,
+  "/meshes/trex/scene.gltf",
   function (gltf) {
     trex = gltf.scene;
     trex.scale.set(0.05, 0.05, 0.05);
