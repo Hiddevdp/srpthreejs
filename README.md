@@ -547,7 +547,6 @@ Ik ben erg blij met het resultaat. Ik heb veel geleerd over threejs en de mogeli
 Als laatste zijn er nog wat dingen die ik zou willen aanvullen:
 
 - Start en restart knop
-- Meer randomness in de hoeveelheid cactussen.
 - Misschien ook meer snelheid naarmate het spel vordert
 - Vogels zoals in het origineel
 - Mogelijkheid te bukken voor de vogels
