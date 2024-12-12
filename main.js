@@ -283,6 +283,48 @@ const enemies = [];
 let frames = 0;
 let spawnRate = 70;
 
+function createCactus() {
+  loader.load(
+    "/meshes/Cactus/cactus.glb",
+    function (gltf) {
+      const cactus = gltf.scene;
+      cactus.scale.set(0.03, 0.03, 0.03);
+      cactus.position.set(0, -1.5, Math.random() * -30 - 10);
+      cactus.rotateY(Math.PI / 2);
+      cactus.castShadow = true;
+      cactus.traverse(function (child) {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      cactus.velocity = { x: 0, y: 0, z: 0.25 };
+      cactus.update = function (ground) {
+        this.position.x += this.velocity.x;
+        this.position.z += this.velocity.z;
+        this.applyGravity(ground);
+      };
+      cactus.applyGravity = function (ground) {
+        this.velocity.y += this.gravity;
+
+        if (boxCollision({ box1: this, box2: ground })) {
+          this.velocity.y = 0;
+          this.position.y = ground.position.y + 2.4;
+        } else {
+          this.position.y += this.velocity.y;
+        }
+      };
+      cactus.gravity = -0.01;
+      scene.add(cactus);
+      enemies.push(cactus);
+    },
+    undefined,
+    function (error) {
+      console.error(error);
+    }
+  );
+}
+
 function animate() {
   const animationId = requestAnimationFrame(animate);
 
@@ -314,46 +356,7 @@ function animate() {
   }
 
   if (frames % spawnRate === 0) {
-    loader.load(
-      "/meshes/Cactus/cactus.glb",
-      function (gltf) {
-        const cactus = gltf.scene;
-        cactus.scale.set(0.03, 0.03, 0.03);
-        cactus.position.set(0, -1.5, -15);
-        cactus.rotateY(Math.PI / 2);
-        cactus.castShadow = true;
-        cactus.traverse(function (child) {
-          if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-          }
-        });
-        cactus.velocity = { x: 0, y: 0, z: 0.25 };
-        cactus.update = function (ground) {
-          this.position.x += this.velocity.x;
-          this.position.z += this.velocity.z;
-          this.applyGravity(ground);
-        };
-        cactus.applyGravity = function (ground) {
-          this.velocity.y += this.gravity;
-
-          if (boxCollision({ box1: this, box2: ground })) {
-            this.velocity.y = 0;
-            this.position.y = ground.position.y + 2.4;
-          } else {
-            this.position.y += this.velocity.y;
-          }
-        };
-
-        cactus.gravity = -0.01;
-        scene.add(cactus);
-        enemies.push(cactus);
-      },
-      undefined,
-      function (error) {
-        console.error(error);
-      }
-    );
+    createCactus();
   }
 
   frames++;
