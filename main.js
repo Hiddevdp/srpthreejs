@@ -30,10 +30,10 @@ const loader = new GLTFLoader();
 let trex;
 
 loader.load(
-  "/meshes/trex/scene.gltf", // Replace with the path to your GLTF file
+  "/meshes/trex/scene.gltf",
   function (gltf) {
     trex = gltf.scene;
-    trex.scale.set(0.05, 0.05, 0.05); // Adjust the scale if necessary
+    trex.scale.set(0.05, 0.05, 0.05);
     trex.position.set(0, -1.5, 7);
     trex.rotateY(Math.PI);
     trex.castShadow = true;
@@ -175,12 +175,10 @@ const ground = new Box({
 ground.receiveShadow = true;
 scene.add(ground);
 
-// Add a light source that casts shadows
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(2, 3, 1);
 light.castShadow = true;
 
-// Adjust the shadow camera properties to increase the shadow casting area
 light.shadow.camera.left = -12;
 light.shadow.camera.right = 12;
 light.shadow.camera.top = 10;
@@ -221,17 +219,15 @@ class Cloud extends THREE.Group {
     const bigPill = new THREE.Mesh(bigPillGeometry, bigPillMaterial);
     bigPill.position.set(0, 0, 0);
 
-    // Smaller pill shape on top
+    // Smaller pill shape
     const smallPillGeometry = new THREE.CapsuleGeometry(1, 1, 4, 8);
     const smallPillMaterial = new THREE.MeshBasicMaterial({ color: "white" });
     const smallPill = new THREE.Mesh(smallPillGeometry, smallPillMaterial);
     smallPill.position.set(1, 0, 0);
 
-    // Add the pill shapes to the group
     this.add(bigPill);
     this.add(smallPill);
 
-    // Set initial position and rotation
     this.position.set(
       Math.random() * 50 - 75,
       Math.random() * 15 - 10,
@@ -289,7 +285,6 @@ let spawnRate = 70;
 
 function animate() {
   const animationId = requestAnimationFrame(animate);
-  //movement code
 
   enemies.forEach((enemy, index) => {
     enemy.update(ground);
@@ -319,21 +314,18 @@ function animate() {
   }
 
   if (frames % spawnRate === 0) {
-    // if (spawnRate > 20) {
-    //   spawnRate -= 20;
-    // }
     loader.load(
-      "/meshes/Cactus/cactus.glb", // Replace with the path to your GLTF file
+      "/meshes/Cactus/cactus.glb",
       function (gltf) {
         const cactus = gltf.scene;
-        cactus.scale.set(0.03, 0.03, 0.03); // Adjust the scale if necessary
-        cactus.position.set(0, -1.5, -15); // Initial position
+        cactus.scale.set(0.03, 0.03, 0.03);
+        cactus.position.set(0, -1.5, -15);
         cactus.rotateY(Math.PI / 2);
         cactus.castShadow = true;
         cactus.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true;
-            child.receiveShadow = true; // Ensure materials support shadows
+            child.receiveShadow = true;
           }
         });
         cactus.velocity = { x: 0, y: 0, z: 0.25 };
@@ -347,7 +339,7 @@ function animate() {
 
           if (boxCollision({ box1: this, box2: ground })) {
             this.velocity.y = 0;
-            this.position.y = ground.position.y + 2.4; // Adjust based on the cactus model's height
+            this.position.y = ground.position.y + 2.4;
           } else {
             this.position.y += this.velocity.y;
           }
